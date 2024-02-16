@@ -1,0 +1,6 @@
+---
+- name: Playbook to install Python
+  hosts: your_target_hosts
+  become: yes
+  roles:
+    - python_install
