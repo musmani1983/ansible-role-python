@@ -1,0 +1,6 @@
+---
+- name: Install Python
+  become: yes
+  package:
+    name: python
+    state: present
