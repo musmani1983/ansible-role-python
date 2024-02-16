@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  tasks:
+  - name: "Print Hello World"
+    debug: msg="Hello World"
+
+  - name: "Check for Python"
+    raw: test -e /usr/bin/python3
+    changed_when: false
+    failed_when: false
+    register: check_python
+
+  - name: "Install Python"
+    raw: apt -y update && apt install -y python-minimal
+    when: check_python.rc != 0
+
+ - name: "Installing package requirment from txt file"
+   pip:
+     requirements: ./requirements.txt
+
+  - name: "Ansible | Creating a file with content"
+    copy:
+      dest: /tmp/pip.conf
+      content: |
+         hello
+         world
